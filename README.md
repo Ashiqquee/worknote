@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Work Notes
+
+Work Notes is a modern, full-stack web application built with Next.js 13+ that helps you track and manage your daily work activities. With features like real-time updates, project-based organization, and detailed analytics, it's the perfect tool for professionals who want to maintain a clear record of their work.
+
+## Features
+
+- 📝 **Work Note Management**
+  - Create, edit, and delete work notes
+  - Organize notes by projects
+  - Rich text descriptions
+  - Time tracking with hours worked
+
+- 📊 **Dashboard & Analytics**
+  - Visual representation of work distribution
+  - Project-wise time allocation
+  - Weekly and monthly statistics
+  - Performance trends
+
+- 🔒 **Secure Authentication**
+  - Email-based authentication
+  - Password reset functionality
+  - Secure session management
+  - Protected routes
+
+- 💫 **Modern UI/UX**
+  - Responsive design
+  - Dark/Light mode support
+  - Toast notifications
+  - Loading states and animations
+
+## Tech Stack
+
+- **Frontend**: Next.js 13+, React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB with Mongoose
+- **Authentication**: NextAuth.js
+- **State Management**: React Hooks
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Form Handling**: React Hook Form, Zod
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18.17 or later
+- MongoDB database (local or Atlas)
+- SMTP server for email functionality
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# MongoDB Connection
+MONGODB_URI=your_mongodb_uri
+
+# NextAuth Configuration
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+
+# SMTP Configuration
+SMTP_HOST=your_smtp_host
+SMTP_PORT=your_smtp_port
+SMTP_USER=your_smtp_user
+SMTP_PASSWORD=your_smtp_password
+SMTP_FROM=your_from_email
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/worknotes.git
+   cd worknotes
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Database Seeding
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To populate the database with sample data:
 
-## Deploy on Vercel
+```bash
+GET /api/seed
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This will create sample work notes with various projects and dates.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API Routes
+
+### Work Notes
+- `GET /api/worknotes` - Get all work notes
+- `POST /api/worknotes` - Create a new work note
+- `GET /api/worknotes/[id]` - Get a specific work note
+- `PUT /api/worknotes/[id]` - Update a work note
+- `DELETE /api/worknotes/[id]` - Delete a work note
+
+### Projects
+- `GET /api/projects` - Get all projects
+
+### Statistics
+- `GET /api/stats` - Get work statistics
+
+## Deployment
+
+### Vercel (Recommended)
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Configure environment variables
+4. Deploy
+
+### Railway
+1. Create a new project in Railway
+2. Connect your GitHub repository
+3. Add MongoDB and configure environment variables
+4. Deploy
+
+### Netlify
+1. Push your code to GitHub
+2. Import your repository in Netlify
+3. Configure build settings and environment variables
+4. Deploy
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
