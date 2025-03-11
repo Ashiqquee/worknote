@@ -74,7 +74,7 @@ export default function ReportsPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [weekStart, weekEnd, selectedProject]);
+  }, [currentWeek, selectedProject]);
 
   const fetchProjects = useCallback(async () => {
     try {
@@ -91,7 +91,30 @@ export default function ReportsPage() {
   }, []);
 
   useEffect(() => {
-    fetchReports();
+    const controller = new AbortController();
+    let isSubscribed = true;
+    
+    const fetchData = async () => {
+      try {
+        if (!isSubscribed) return;
+        await fetchReports();
+      } catch (error: unknown) {
+        if (!isSubscribed) return;
+        if (error instanceof Error) {
+          if (error.name === 'AbortError') {
+            return; // Ignore abort errors
+          }
+          console.error('Error:', error.message);
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isSubscribed = false;
+      controller.abort(); // Cleanup pending requests when dependencies change
+    };
   }, [fetchReports]);
 
   useEffect(() => {
